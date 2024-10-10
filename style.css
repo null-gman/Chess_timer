@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+html {
+  height: 100vh;
+}
+html body {
+  height: inherit;
+  background-color: inherit;
+}
+
+#root {
+  height: inherit;
+  width: 100%;
+  display: flex;
+  padding: 50px;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#main .player {
+  height: 50%;
+  width: 100%;
+}
+#main .player .btnTimer {
+  height: 70%;
+  width: 100%;
+}
+#main .player .lable {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+#main .player .lable h2 {
+  font-size: 50px;
+}
+#main .player .lable p {
+  font-size: 20px;
+}
+
+.losaing {
+  color: red;
+}
+
+.btnTimer {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90PX;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.9);
+  user-select: none;
+  border: none;
+  outline: none;
+}
+.btnTimer:active {
+  border: none;
+  outline: none;
+}
+
+.wating.btnTimer {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#player-white {
+  display: flex;
+  flex-direction: column-reverse;
+}
+#player-white .btnTimer {
+  background-color: #C53434;
+  transform: rotate(180deg);
+}
+#player-white .lable {
+  display: flex;
+  flex-direction: row-reverse;
+}
+#player-white .lable p {
+  transform: rotate(180deg);
+}
+#player-white .lable h2 {
+  transform: rotate(180deg);
+}
+
+#player-black .btnTimer {
+  background-color: #3F2E2E;
+}
+
+@media screen and (max-width: 600px) {
+  #root {
+    padding: 20px;
+  }
+  .btnTimer {
+    font-size: 60PX;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

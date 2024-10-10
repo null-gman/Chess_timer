@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:rgb(231, 231, 231);">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Chess Timer</title>
+</head>
+<body style="display: none;">
+
+  <div id="root" >
+    <div id="main">
+        <section class="player " id="player-white">
+          <button class="btnTimer" id="btn-white"></button>
+          <div class="lable">
+            <h2>wight</h2>
+            <p id="timeLable-white"  class="timingP">10 : 0</p>
+          </div>
+        </section>
+
+        <section class="player " id="player-black">
+          <button class="btnTimer" id="btn-black"></button>
+          <div class="lable">
+            <h2>black</h2>
+            <p id="timeLable-black" class="timingP">10 : 0</p>
+          </div>
+        </section>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
