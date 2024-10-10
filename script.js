@@ -74,19 +74,19 @@ class  Player {
 global.time = prompt("time by minutes" , "10") * 60;
 
 
-const white = new Player("white",false);
-const black = new Player("black",true);
 
-black.disable()
-global.disable = function (team){
-  if (team == "white") {
-    black.allowed()
-  } else {
-    white.allowed()
-  }
-}
 function main(){
+  const white = new Player("white",false);
+  const black = new Player("black",true);
 
+  black.disable()
+  global.disable = function (team){
+    if (team == "white") {
+      black.allowed()
+    } else {
+      white.allowed()
+    }
+  }
 }
 
 
