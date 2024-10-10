@@ -39,6 +39,10 @@ class  Player {
     if (this.time < 30) {
          this.lable.classList.add("losaing");
     }
+    if (this.time < 0) {
+      this.lable.textContent=`0 : 0`;
+      return;
+    }
     this.lable.textContent=`${min} : ${sec}`;
 
   }
