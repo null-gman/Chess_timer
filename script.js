@@ -1,5 +1,6 @@
 const global = {
-  time : 10 * 60 
+  time : 10 * 60 ,
+  disable : undefined
 }
 
 
@@ -16,7 +17,7 @@ class  Player {
     this.btn.addEventListener("click",()=>{
       this.disable();
       this.stop();
-      disable(this.team)
+      global.disable(this.team)
 
     })
   }
@@ -44,15 +45,14 @@ class  Player {
 
   stop = ()=>{
     this.timing && clearInterval(this.timing);
-    this.time = this.time - 1;
-    this.setLableTime();
 
   }
   run = ()=>{
     this.timing = setInterval(()=>{
       this.time--;
       this.setLableTime()
-      if (this.time == 0) {
+      if (this.time <= 0) {
+        this.setLableTime()
         this.disable()
         this.stop()
         alert(`${this.team === "white" ? "black" : "white" } wins`)
@@ -67,25 +67,26 @@ class  Player {
 
 
 
-function disable (team){
+global.time = prompt("time by minutes" , "10") * 60;
+
+
+const white = new Player("white",false);
+const black = new Player("black",true);
+
+black.disable()
+global.disable = function (team){
   if (team == "white") {
     black.allowed()
   } else {
     white.allowed()
   }
 }
+function main(){
 
-const white = new Player("white",false);
-const black = new Player("black",true);
-
-function main() {
-  global.time = prompt("time by minutes" , "10") * 60;
-  black.disable()
 }
-
 
 
 document.body.onload = function(){
   document.body.style.display="block";
-  setTimeout(main,0)
+  setTimeout( main, 0);
 }
