@@ -118,7 +118,7 @@ function popups() {
     global.popupTime.btn = document.getElementById("btnForPopupNumber")
     global.popupTime.fun = () => {
       
-      global.time = Math.abs(Number(global.popupTime.input.value)) * 60 < 10081 | 600 ;
+      global.time = Math.abs(Number(global.popupTime.input.value)) * 60 || 600 ;
 
       global.again();
       global.popup = document.getElementById("popup");

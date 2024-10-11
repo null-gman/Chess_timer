@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "build": "babel main.js -d lib"
+    "build": "babel script.js -d lib"
   },
   "keywords": [],
   "author": "",
