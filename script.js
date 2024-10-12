@@ -1,38 +1,83 @@
 const global = {
   time: 10 * 60,
-  popupTime: {},
-  popupEnd: {}
-}
-global.popupCreateDom = (what,team) => {
-  const input = `
-        <section class="main">
-          <h3 class="title">Chess timer</h3>
-          <div class="form">
-            <label for="timeNum">Match time</label>
-            <input type="number" value="10" placeholder="by minets" id="input-timeNum" > 
-          </div>
-          <aside class="btnPopup">
-            <button id="btnForPopupNumber">START</button>
-          </aside>
-      </section>`
-
-  const ends = `
-      <section class="main ends">
-        <h3 class="title">${team} wins</h3>
-        <div class="form">
-          <label for="timeNum">rematch?</label>
-        </div>
-        <aside class="btnPopup">
-          <button  id="reYes"> yes</button>
-          <button  id="reNo"> no</button>
-        </aside>
-    </section>`
-  let res = document.createElement("aside")
-  res.id="popup";
-  res.innerHTML= what !== "ends" ? ends : input;
-  return res;
+  speed: 1000
 }
 // 10080 max match time
+
+global.popupDomCreateDom = (team = undefined) => {
+  const mainDOM = document.getElementById("root");
+  const rootDom = document.createElement("aside");
+  rootDom.setAttribute("id", "popup");
+
+  const popupDom = document.createElement("section");
+  popupDom.classList.add("main");
+
+  const h3 = document.createElement("h3");
+  h3.classList.add("title");
+
+  const form = document.createElement("div");
+  form.classList.add("form");
+
+  const label = document.createElement("label");
+
+  const aside = document.createElement("aside");
+  aside.classList.add("btnPopup");
+
+  if (!team) {
+    h3.textContent = "Chess timer";
+    popupDom.appendChild(h3);
+    label.textContent = "Match Time";
+    form.appendChild(label);
+    const inputNumber = document.createElement("input");
+    inputNumber.setAttribute("type", "number");
+    inputNumber.setAttribute("placeholder", "by minets");
+    inputNumber.setAttribute("value", "10");
+    const fun = () => {
+      const root = document.getElementById("popup")
+      global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
+      global.again();
+      mainDOM.removeChild(root);
+    }
+    form.appendChild(inputNumber);
+    popupDom.appendChild(form);
+    const btnStart = document.createElement("button");
+    btnStart.textContent = "START";
+    btnStart.addEventListener("click", fun);
+    aside.appendChild(btnStart);
+    popupDom.appendChild(aside);
+  } 
+  else {
+    popupDom.classList.add("ends")
+    h3.classList.add("title");
+    h3.textContent = `${team === "white" ? "black" : "white"} wins`;
+    popupDom.appendChild(h3);
+    label.textContent = "rematch"
+    form.appendChild(label);
+    popupDom.appendChild(form);
+    fun = (check) => {
+      const root = document.getElementById("popup")
+      mainDOM.removeChild(root)
+      if (check) {
+        global.popupDomCreateDom()
+      }
+    }
+    const yesBtn = document.createElement("button");
+    yesBtn.textContent = "yes";
+    yesBtn.addEventListener("click", () => fun(true));
+    aside.appendChild(yesBtn);
+    const noBtn = document.createElement("button");
+    noBtn.textContent = "no";
+    noBtn.addEventListener("click", () => fun(false));
+    aside.appendChild(noBtn);
+    popupDom.appendChild(aside);
+  }
+
+  rootDom.appendChild(popupDom)
+  root.appendChild(rootDom)
+  return "Done";
+}
+
+
 
 class Player {
   constructor(team) {
@@ -78,7 +123,7 @@ class Player {
       sec = this.time % 60;
     if (this.time < 30) {
       this.lable.classList.add("losaing");
-    }else{
+    } else {
       this.lable.classList.remove("losaing");
     }
     if (this.time < 0) {
@@ -100,51 +145,10 @@ class Player {
         this.setLableTime()
         this.hidden()
         this.stop()
-        root.appendChild(global.popupCreateDom("start",`${this.team === "white" ? "black" : "white" }`))
-        global.endEven()
+        global.popupDomCreateDom(this.team)
       }
-    }, 1000)
+    }, global.speed)
   }
-
-}
-
-
-
-function popups() {
-  const root = document.getElementById("root")
-
-  global.timeEven = function (){
-    global.popupTime.input = document.getElementById("input-timeNum")
-    global.popupTime.btn = document.getElementById("btnForPopupNumber")
-    global.popupTime.fun = () => {
-      
-      global.time = Math.abs(Number(global.popupTime.input.value)) * 60 || 600 ;
-
-      global.again();
-      global.popup = document.getElementById("popup");
-      root.removeChild(global.popup);
-
-    }
-    global.popupTime.btn.addEventListener("click", global.popupTime.fun)
-  }
-
-  global.endEven = function() {
-    global.popupEnd.yes = document.getElementById("reYes");
-    global.popupEnd.no = document.getElementById("reNo");
-
-    global.popupEnd.fun = (check) => {
-      global.popup = document.getElementById("popup");
-      root.removeChild(global.popup)
-      if (check) {
-        root.appendChild(global.popupCreateDom("ends"))
-        global.timeEven()
-      }
-    }
-    global.popupEnd.yes.addEventListener("click", () => global.popupEnd.fun(true))
-    global.popupEnd.no.addEventListener("click", () => global.popupEnd.fun(false))
-
-  }
-  global.timeEven();
 
 }
 
@@ -154,7 +158,6 @@ function main() {
   const black = new Player("black");
   black.hidden()
 
-
   global.finishedMyTurn = function (team) {
     if (team == "white") {
       black.myTurn()
@@ -162,21 +165,17 @@ function main() {
       white.myTurn()
     }
   }
-
   global.again = function () {
     white.restart()
     black.restart()
     white.visible()
   }
 
-
-
 }
 
-
 document.body.onload = function () {
+  global.popupDomCreateDom();
   document.body.style.display = "block";
   main();
-  popups();
 
 }
