@@ -4,10 +4,11 @@ const global = {
 }
 // 10080 max match time
 
-global.popupDomCreateDom = (team = undefined) => {
-  const mainDOM = document.getElementById("root");
-  const rootDom = document.createElement("aside");
-  rootDom.setAttribute("id", "popup");
+global.popupDomRnder = (team = undefined) => {
+  const rootDom = document.getElementById("root");
+
+  const mainDom = document.createElement("aside");
+  mainDom.setAttribute("id", "popup");
 
   const popupDom = document.createElement("section");
   popupDom.classList.add("main");
@@ -35,8 +36,8 @@ global.popupDomCreateDom = (team = undefined) => {
     const fun = () => {
       const root = document.getElementById("popup")
       global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
-      global.again();
-      mainDOM.removeChild(root);
+      global.ReMatch();
+      rootDom.removeChild(root);
     }
     form.appendChild(inputNumber);
     popupDom.appendChild(form);
@@ -56,9 +57,9 @@ global.popupDomCreateDom = (team = undefined) => {
     popupDom.appendChild(form);
     fun = (check) => {
       const root = document.getElementById("popup")
-      mainDOM.removeChild(root)
+      rootDom.removeChild(root)
       if (check) {
-        global.popupDomCreateDom()
+        global.popupDomRnder()
       }
     }
     const yesBtn = document.createElement("button");
@@ -72,8 +73,8 @@ global.popupDomCreateDom = (team = undefined) => {
     popupDom.appendChild(aside);
   }
 
-  rootDom.appendChild(popupDom)
-  root.appendChild(rootDom)
+  mainDom.appendChild(popupDom)
+  rootDom.appendChild(mainDom)
   return "Done";
 }
 
@@ -145,7 +146,7 @@ class Player {
         this.setLableTime()
         this.hidden()
         this.stop()
-        global.popupDomCreateDom(this.team)
+        global.popupDomRnder(this.team)
       }
     }, global.speed)
   }
@@ -165,7 +166,7 @@ function main() {
       white.myTurn()
     }
   }
-  global.again = function () {
+  global.ReMatch = function () {
     white.restart()
     black.restart()
     white.visible()
@@ -174,7 +175,7 @@ function main() {
 }
 
 document.body.onload = function () {
-  global.popupDomCreateDom();
+  global.popupDomRnder();
   document.body.style.display = "block";
   main();
 
