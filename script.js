@@ -32,13 +32,21 @@ global.popupDomRnder = (team = undefined) => {
     const inputNumber = document.createElement("input");
     inputNumber.setAttribute("type", "number");
     inputNumber.setAttribute("placeholder", "by minets");
-    inputNumber.setAttribute("value", "10");
+    inputNumber.setAttribute("id", "inputNumberForTime");
+    inputNumber.value = "10";
     const fun = () => {
       const root = document.getElementById("popup")
       global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
       global.ReMatch();
       rootDom.removeChild(root);
     }
+
+    inputNumber.addEventListener("keydown", (ev)=>{
+      if (ev.keyCode == 13) {
+        fun()
+      }
+    });
+
     form.appendChild(inputNumber);
     popupDom.appendChild(form);
     const btnStart = document.createElement("button");
@@ -46,6 +54,7 @@ global.popupDomRnder = (team = undefined) => {
     btnStart.addEventListener("click", fun);
     aside.appendChild(btnStart);
     popupDom.appendChild(aside);
+    
   } 
   else {
     popupDom.classList.add("ends")
@@ -75,6 +84,7 @@ global.popupDomRnder = (team = undefined) => {
 
   mainDom.appendChild(popupDom)
   rootDom.appendChild(mainDom)
+  !team ? document.getElementById("inputNumberForTime").focus() : null;
   return "Done";
 }
 
@@ -141,12 +151,12 @@ class Player {
   run = () => {
     this.timing = setInterval(() => {
       this.time--;
-      this.setLableTime()
+      this.setLableTime();
       if (this.time <= 0) {
-        this.setLableTime()
-        this.hidden()
-        this.stop()
-        global.popupDomRnder(this.team)
+        this.setLableTime();
+        this.hidden();
+        this.stop();
+        global.popupDomRnder(this.team);
       }
     }, global.speed)
   }
@@ -175,8 +185,8 @@ function main() {
 }
 
 document.body.onload = function () {
-  global.popupDomRnder();
   document.body.style.display = "block";
+  global.popupDomRnder();
   main();
 
 }
