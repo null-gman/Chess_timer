@@ -13,6 +13,7 @@ html {
 html body {
   height: inherit;
   background-color: inherit;
+  background-color: #c7c7c7;
 }
 
 button,
@@ -63,7 +64,7 @@ input:active {
   font-size: 50px;
 }
 #main .player .lable p {
-  font-size: 20px;
+  font-size: 45px;
 }
 
 .losaing {
@@ -77,12 +78,12 @@ input:active {
   align-items: center;
   font-size: 90PX;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.9);
+  color: rgba(0, 0, 0, 0.815);
   user-select: none;
 }
 
 .wating.btnTimer {
-  opacity: 0.4;
+  opacity: 0;
   cursor: not-allowed;
 }
 
@@ -106,7 +107,7 @@ input:active {
 }
 
 #player-black .btnTimer {
-  background-color: #3F2E2E;
+  background-color: #C53434;
 }
 
 #popup {

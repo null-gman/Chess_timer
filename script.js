@@ -36,7 +36,15 @@ global.popupDomRnder = (team = undefined) => {
     inputNumber.value = "10";
     const fun = () => {
       const root = document.getElementById("popup")
-      global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
+
+
+      if (Number(inputNumber.value) > 999){
+        global.time = 999 * 60 || 600
+      }else{
+        global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
+      }
+
+      
       global.ReMatch();
       rootDom.removeChild(root);
     }
