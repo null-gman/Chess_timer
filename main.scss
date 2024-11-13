@@ -71,7 +71,7 @@ html {
         align-items: center;
         // background-color: red;
         color: $black;
-        font-size: 90px;
+        font-size: 100px;
         font-weight: 900;
       }
     }
@@ -240,7 +240,13 @@ html {
       justify-content: space-between;
 
       button {
+        &:first-child {
+    
+          background-color: #D9D9D9;
+          color: black;
+        }
         &:last-child {
+          display: none;
           background-color: #D9D9D9;
           color: black;
         }

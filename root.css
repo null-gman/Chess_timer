@@ -55,7 +55,7 @@ html body {
   justify-content: center;
   align-items: center;
   color: rgb(25, 23, 23);
-  font-size: 90px;
+  font-size: 100px;
   font-weight: 900;
 }
 
@@ -168,7 +168,12 @@ html body {
   display: flex;
   justify-content: space-between;
 }
+#popup .main.ends .btnPopup button:first-child {
+  background-color: #D9D9D9;
+  color: black;
+}
 #popup .main.ends .btnPopup button:last-child {
+  display: none;
   background-color: #D9D9D9;
   color: black;
 }
