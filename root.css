@@ -20,11 +20,13 @@ html body {
   flex-direction: column;
 }
 #main .player {
-  padding: 10px;
+  cursor: pointer;
   height: 50%;
   width: 100%;
+  background-color: rgb(194, 194, 40);
 }
 #main .player .btnTimer {
+  display: none;
   height: 70%;
   width: 100%;
   cursor: pointer;
@@ -38,37 +40,31 @@ html body {
   background-color: rgb(194, 194, 40);
 }
 #main .player .lable {
-  height: 30%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  height: 100%;
   user-select: none;
 }
 #main .player .lable h2 {
+  display: none;
   font-size: 40px;
   font-weight: 900;
 }
 #main .player .lable p {
-  font-size: 40px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(25, 23, 23);
+  font-size: 90px;
   font-weight: 900;
 }
 
 #player-white {
-  background-color: rgb(25, 23, 23);
   display: flex;
   flex-direction: column-reverse;
 }
 #player-white .btnTimer {
   transform: rotate(180deg);
-}
-#player-white .lable {
-  display: flex;
-  flex-direction: row-reverse;
-}
-#player-white .lable h2,
-#player-white .lable p {
-  color: rgb(255, 240, 240);
 }
 #player-white .lable h2 {
   transform: rotate(180deg);
@@ -80,11 +76,6 @@ html body {
 #player-black {
   background-color: rgb(255, 240, 240);
 }
-#player-black h2,
-#player-black p {
-  color: rgb(25, 23, 23);
-}
-
 #popup {
   position: fixed;
   inset: 0;
@@ -231,12 +222,13 @@ html body {
 }
 .player.wating {
   background-color: transparent !important;
+  pointer-events: none;
 }
 .player.wating .btnTimer {
   opacity: 0 !important;
   cursor: not-allowed !important;
 }
-.player.wating p {
+.player.wating .lable p {
   animation: watingPlayer 3s !important;
   animation-iteration-count: infinite !important;
   animation-timing-function: linear !important;

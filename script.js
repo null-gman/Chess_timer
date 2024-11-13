@@ -112,8 +112,10 @@ class Player {
     this.playerMain = document.getElementById(`player-${this.team}`)
     // console.log(this.playerMain);
     
+    // this.btn = document.getElementById(`btn-${this.team}`)
     this.btn = document.getElementById(`btn-${this.team}`)
     this.lable = document.getElementById(`timeLable-${this.team}`)
+    this.btn = this.playerMain;
     this.setLableTime();
 
     this.btn.addEventListener("click", () => {

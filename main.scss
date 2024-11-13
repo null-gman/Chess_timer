@@ -29,11 +29,13 @@ html {
   display: flex;
   flex-direction: column;
   .player {
-    padding: 10px;
+    cursor: pointer;
+    // padding: 10px;
     height: 50%;
     width: 100%;
-
+    background-color: $mainC;
     .btnTimer {
+      display: none;
       height: 70%;
       width: 100%;
       cursor: pointer;
@@ -48,20 +50,28 @@ html {
     }
 
     .lable {
-      height: 30%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      height: 100%;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-between;
+      // justify-content: center;
       user-select: none;
 
       h2 {
+        display: none;
         font-size: 40px;
         font-weight: 900;
       }
 
       p {
-        font-size: 40px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // background-color: red;
+        color: $black;
+        font-size: 90px;
         font-weight: 900;
       }
     }
@@ -75,7 +85,7 @@ html {
 
 #player-white {
 
-  background-color: $black;
+
 
   .btnTimer {
     // background-color: #C53434;
@@ -84,15 +94,8 @@ html {
   }
 
   .lable {
-    display: flex;
-    flex-direction: row-reverse;
-
-
-    h2,
-    p {
-      color: $white;
-    }
-
+    // display: flex;
+    // flex-direction: row-reverse;
     h2 {
       transform: rotate(180deg);
     }
@@ -117,7 +120,7 @@ html {
 
   h2,
   p {
-    color: $black;
+    // color: $black;
   }
 }
 
@@ -328,17 +331,19 @@ html {
 
 .player.wating{
   background-color: transparent  !important;
-
+  pointer-events: none;
   .btnTimer {
     opacity: .0 !important;
     cursor: not-allowed !important;
   }
-
-  p{
-    animation: watingPlayer 3s !important;
-    animation-iteration-count: infinite !important;
-    animation-timing-function: linear !important;
+  .lable{
+    p{
+      animation: watingPlayer 3s !important;
+      animation-iteration-count: infinite !important;
+      animation-timing-function: linear !important;
+    }
   }
+
 
 }
 
@@ -347,8 +352,6 @@ html {
     color: rgba(255, 0, 0, 0.909) !important;
   }
 }
-
-
 
 
 @keyframes watingPlayer {
