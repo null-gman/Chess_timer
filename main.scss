@@ -1,3 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+button,
+input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  &:active {
+    border: none;
+    outline: none;
+  }
+}
+
+
+
 $white : rgb(255, 240, 240);
 $black : rgb(25, 23, 23);
 
