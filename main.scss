@@ -1,10 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 10px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+$white : rgb(255, 240, 240);
+$black : rgb(25, 23, 23);
+
+$mainC :  rgb(194, 194, 40) ;
 
 html {
   height: 100vh;
@@ -13,49 +10,41 @@ html {
   body {
     height: inherit;
     background-color: inherit;
-    background-color: #c7c7c7;
+    background-color: #8f8f8f;
   }
 }
 
-button,
-input {
-  border: none;
-  background-color: transparent;
-  outline: none;
-
-  &:active {
-    border: none;
-    outline: none;
-  }
-}
 
 #root {
   height: inherit;
   width: 100%;
-  display: flex;
-  padding: 50px;
+  // display: flex;
 }
 
 #main {
   width: 100%;
   height: 100%;
-  margin: auto;
-  padding: 10px;
+  // margin: auto;
+  // padding: 10px;
   display: flex;
   flex-direction: column;
-  >div{
-    width: 100%;
-    height:10px;
-    background-color: #000000;
-  }
   .player {
+    padding: 10px;
     height: 50%;
-
     width: 100%;
 
     .btnTimer {
       height: 70%;
       width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 90PX;
+      font-weight: 900;
+      color: rgba(0, 0, 0, 0.815);
+      user-select: none;
+      background-color:$mainC;
     }
 
     .lable {
@@ -67,43 +56,30 @@ input {
       user-select: none;
 
       h2 {
-        font-size: 50px;
+        font-size: 40px;
+        font-weight: 900;
       }
 
       p {
-        font-size: 45px;
+        font-size: 40px;
+        font-weight: 900;
       }
     }
   }
 
 }
 
-.losaing {
-  color: red;
-}
-
-.btnTimer {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 90PX;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.815);
-  user-select: none;
 
 
-}
 
-.wating.btnTimer {
-  opacity: .0;
-  cursor: not-allowed;
-}
 
 #player-white {
+
+  background-color: $black;
+
   .btnTimer {
     // background-color: #C53434;
-    background-color: rgb(204, 204, 26);
+
     transform: rotate(180deg);
   }
 
@@ -111,17 +87,19 @@ input {
     display: flex;
     flex-direction: row-reverse;
 
-    h2 {
-      color: #C53434;
-      transform: rotate(180deg);
-    }
-    
+
+    h2,
     p {
-      color: #C53434;
+      color: $white;
+    }
+
+    h2 {
       transform: rotate(180deg);
     }
 
- 
+    p {
+      transform: rotate(180deg);
+    }
   }
 
   display: flex;
@@ -130,12 +108,17 @@ input {
 }
 
 #player-black {
+  background-color: $white;
+
   .btnTimer {
     // background-color: #3F2E2E;
     // background-color: #C53434;
-    background-color: rgb(204, 204, 26);
   }
 
+  h2,
+  p {
+    color: $black;
+  }
 }
 
 
@@ -183,7 +166,7 @@ input {
       label,
       input {
         display: block;
-        color: rgb(234, 43, 43);
+        color: $mainC;
         width: 100%;
       }
 
@@ -197,8 +180,8 @@ input {
         height: 30px;
         padding: 10px;
         border-radius: 3px;
-        color: rgb(255, 255, 255, .8);
-        background-color: #513E3E;
+        color:$black;
+        background-color: $white;
       }
     }
 
@@ -215,9 +198,9 @@ input {
       button {
         border-radius: 2px;
         cursor: pointer;
-        color: rgb(255, 255, 255, .8);
+        color:$black;
         padding: 10px 30px;
-        background-color: #C53434;
+        background-color:$mainC;
 
       }
 
@@ -268,7 +251,7 @@ input {
 
 @media screen and (max-width:600px) {
   #root {
-    padding: 20px;
+    // padding: 20px;
   }
 
   .btnTimer {
@@ -334,5 +317,53 @@ input {
         }
       }
     }
+  }
+}
+
+
+
+
+
+//eventes 
+
+.player.wating{
+  background-color: transparent  !important;
+
+  .btnTimer {
+    opacity: .0 !important;
+    cursor: not-allowed !important;
+  }
+
+  p{
+    animation: watingPlayer 3s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: linear !important;
+  }
+
+}
+
+.player.losaing{
+  p{
+    color: rgba(255, 0, 0, 0.909) !important;
+  }
+}
+
+
+
+
+@keyframes watingPlayer {
+
+  0% {
+    opacity: .6;
+
+  }
+
+  50% {
+    opacity: .3;
+  }
+
+  100% {
+    opacity: .6;
+
   }
 }

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
   <link rel="stylesheet" href="./root.css">
   <title>Chess Timer</title>
   <!-- <link rel="icon" type="image/jpge" href="./logoChessTimer.jpg"> -->
@@ -12,18 +13,18 @@
 
   <div id="root" >
     <div id="main">
-        <section class="player " id="player-white">
+        <section class="player" id="player-white">
           <button class="btnTimer" id="btn-white"></button>
           <div class="lable">
-            <h2>white</h2>
+            <h2>White</h2>
             <p id="timeLable-white"  class="timingP">10 : 0</p>
           </div>
         </section>
-        <div id="wall"></div>
-        <section class="player " id="player-black">
+ 
+        <section class="player wating" id="player-black">
           <button class="btnTimer" id="btn-black"></button>
           <div class="lable">
-            <h2>black</h2>
+            <h2>Black</h2>
             <p id="timeLable-black" class="timingP">10 : 0</p>
           </div>
         </section>
@@ -58,7 +59,7 @@
 
 
  
-  <script src="./script.js"></script>
-  <!-- <script src="./lib/script.js"></script> -->
+  <!-- <script src="./script.js"></script> -->
+  <script src="./lib/script.js"></script>
 </body>
 </html>

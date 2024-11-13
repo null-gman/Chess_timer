@@ -1,11 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 10px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-
 html {
   height: 100vh;
   height: 100svh;
@@ -13,48 +5,37 @@ html {
 html body {
   height: inherit;
   background-color: inherit;
-  background-color: #c7c7c7;
-}
-
-button,
-input {
-  border: none;
-  background-color: transparent;
-  outline: none;
-}
-button:active,
-input:active {
-  border: none;
-  outline: none;
+  background-color: #8f8f8f;
 }
 
 #root {
   height: inherit;
   width: 100%;
-  display: flex;
-  padding: 50px;
 }
 
 #main {
   width: 100%;
   height: 100%;
-  margin: auto;
-  padding: 10px;
   display: flex;
   flex-direction: column;
 }
-#main > div {
-  width: 100%;
-  height: 10px;
-  background-color: #000000;
-}
 #main .player {
+  padding: 10px;
   height: 50%;
   width: 100%;
 }
 #main .player .btnTimer {
   height: 70%;
   width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90PX;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.815);
+  user-select: none;
+  background-color: rgb(194, 194, 40);
 }
 #main .player .lable {
   height: 30%;
@@ -65,55 +46,43 @@ input:active {
   user-select: none;
 }
 #main .player .lable h2 {
-  font-size: 50px;
+  font-size: 40px;
+  font-weight: 900;
 }
 #main .player .lable p {
-  font-size: 45px;
-}
-
-.losaing {
-  color: red;
-}
-
-.btnTimer {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 90PX;
+  font-size: 40px;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.815);
-  user-select: none;
-}
-
-.wating.btnTimer {
-  opacity: 0;
-  cursor: not-allowed;
 }
 
 #player-white {
+  background-color: rgb(25, 23, 23);
   display: flex;
   flex-direction: column-reverse;
 }
 #player-white .btnTimer {
-  background-color: rgb(204, 204, 26);
   transform: rotate(180deg);
 }
 #player-white .lable {
   display: flex;
   flex-direction: row-reverse;
 }
+#player-white .lable h2,
+#player-white .lable p {
+  color: rgb(255, 240, 240);
+}
 #player-white .lable h2 {
-  color: #C53434;
   transform: rotate(180deg);
 }
 #player-white .lable p {
-  color: #C53434;
   transform: rotate(180deg);
 }
 
-#player-black .btnTimer {
-  background-color: rgb(204, 204, 26);
+#player-black {
+  background-color: rgb(255, 240, 240);
+}
+#player-black h2,
+#player-black p {
+  color: rgb(25, 23, 23);
 }
 
 #popup {
@@ -155,7 +124,7 @@ input:active {
 #popup .main .form label,
 #popup .main .form input {
   display: block;
-  color: rgb(234, 43, 43);
+  color: rgb(194, 194, 40);
   width: 100%;
 }
 #popup .main .form label {
@@ -167,8 +136,8 @@ input:active {
   height: 30px;
   padding: 10px;
   border-radius: 3px;
-  color: rgba(255, 255, 255, 0.8);
-  background-color: #513E3E;
+  color: rgb(25, 23, 23);
+  background-color: rgb(255, 240, 240);
 }
 #popup .main .btnPopup {
   cursor: pointer;
@@ -182,9 +151,9 @@ input:active {
 #popup .main .btnPopup button {
   border-radius: 2px;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(25, 23, 23);
   padding: 10px 30px;
-  background-color: #C53434;
+  background-color: rgb(194, 194, 40);
 }
 #popup .main.ends .title {
   height: 60%;
@@ -214,9 +183,6 @@ input:active {
 }
 
 @media screen and (max-width: 600px) {
-  #root {
-    padding: 20px;
-  }
   .btnTimer {
     font-size: 60PX;
   }
@@ -261,6 +227,34 @@ input:active {
   #popup .main.ends .btnPopup button:last-child {
     background-color: #D9D9D9;
     color: black;
+  }
+}
+.player.wating {
+  background-color: transparent !important;
+}
+.player.wating .btnTimer {
+  opacity: 0 !important;
+  cursor: not-allowed !important;
+}
+.player.wating p {
+  animation: watingPlayer 3s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: linear !important;
+}
+
+.player.losaing p {
+  color: rgba(255, 0, 0, 0.909) !important;
+}
+
+@keyframes watingPlayer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
   }
 }
 

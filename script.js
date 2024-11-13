@@ -33,25 +33,19 @@ global.popupDomRnder = (team = undefined) => {
     inputNumber.setAttribute("type", "number");
     inputNumber.setAttribute("placeholder", "by minets");
     inputNumber.setAttribute("id", "inputNumberForTime");
-    inputNumber.value = "10";
-    const fun = () => {
+
+    inputNumber.value = "10"; //default value
+
+    const startGame = () => {
       const root = document.getElementById("popup")
-
-
-      if (Number(inputNumber.value) > 999){
-        global.time = 999 * 60 || 600
-      }else{
-        global.time = Math.abs(Number(inputNumber.value)) * 60 || 600;
-      }
-
-      
+      global.time = getTimeFromInput(inputNumber)
       global.ReMatch();
       rootDom.removeChild(root);
     }
 
-    inputNumber.addEventListener("keydown", (ev)=>{
+    inputNumber.addEventListener("keydown", (ev) => {
       if (ev.keyCode == 13) {
-        fun()
+        startGame()
       }
     });
 
@@ -59,11 +53,11 @@ global.popupDomRnder = (team = undefined) => {
     popupDom.appendChild(form);
     const btnStart = document.createElement("button");
     btnStart.textContent = "START";
-    btnStart.addEventListener("click", fun);
+    btnStart.addEventListener("click", startGame);
     aside.appendChild(btnStart);
     popupDom.appendChild(aside);
-    
-  } 
+
+  }
   else {
     popupDom.classList.add("ends")
     h3.classList.add("title");
@@ -72,7 +66,7 @@ global.popupDomRnder = (team = undefined) => {
     label.textContent = "rematch"
     form.appendChild(label);
     popupDom.appendChild(form);
-    fun = (check) => {
+    endGamePopup = (check) => {
       const root = document.getElementById("popup")
       rootDom.removeChild(root)
       if (check) {
@@ -81,11 +75,11 @@ global.popupDomRnder = (team = undefined) => {
     }
     const yesBtn = document.createElement("button");
     yesBtn.textContent = "yes";
-    yesBtn.addEventListener("click", () => fun(true));
+    yesBtn.addEventListener("click", () => endGamePopup(true));
     aside.appendChild(yesBtn);
     const noBtn = document.createElement("button");
     noBtn.textContent = "no";
-    noBtn.addEventListener("click", () => fun(false));
+    noBtn.addEventListener("click", () => endGamePopup(false));
     aside.appendChild(noBtn);
     popupDom.appendChild(aside);
   }
@@ -97,6 +91,17 @@ global.popupDomRnder = (team = undefined) => {
 }
 
 
+function getTimeFromInput(inputEleObj, target) {
+  let value = +inputEleObj.value;
+
+  if (value > 999) {
+    value = 999;
+  } else {
+    value = Math.abs(Number(value));
+  }
+  value = value * 60 || 600
+  return value
+}
 
 class Player {
   constructor(team) {
@@ -104,6 +109,9 @@ class Player {
     this.team = team;
     this.timing; // this contain setInterval fun to clear
 
+    this.playerMain = document.getElementById(`player-${this.team}`)
+    // console.log(this.playerMain);
+    
     this.btn = document.getElementById(`btn-${this.team}`)
     this.lable = document.getElementById(`timeLable-${this.team}`)
     this.setLableTime();
@@ -115,6 +123,7 @@ class Player {
 
     })
   }
+
   restart = () => {
     this.time = global.time;
     this.stop()
@@ -124,12 +133,12 @@ class Player {
 
   visible = () => {
     this.btn.removeAttribute("disabled");
-    this.btn.classList.remove("wating");
+    this.playerMain.classList.remove("wating");
   }
 
   hidden = () => {
     this.btn.setAttribute("disabled", "true");
-    this.btn.classList.add("wating")
+    this.playerMain.classList.add("wating")
   }
 
   myTurn = () => {
@@ -141,9 +150,9 @@ class Player {
     const min = Math.floor(this.time / 60),
       sec = this.time % 60;
     if (this.time < 30) {
-      this.lable.classList.add("losaing");
+      this.playerMain.classList.add("losaing");
     } else {
-      this.lable.classList.remove("losaing");
+      this.playerMain.classList.remove("losaing");
     }
     if (this.time < 0) {
       this.lable.textContent = `0 : 0`;
@@ -171,7 +180,6 @@ class Player {
 
 }
 
-
 function main() {
   const white = new Player("white");
   const black = new Player("black");
@@ -184,6 +192,8 @@ function main() {
       white.myTurn()
     }
   }
+
+
   global.ReMatch = function () {
     white.restart()
     black.restart()
